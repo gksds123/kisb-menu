@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>KISB 오늘의 급식</title>
 
   <!-- iOS PWA 설정 및 manifest 연결 -->
@@ -12,8 +12,22 @@
   <link rel="manifest" href="./manifest.json" />
 
   <style>
-    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    body { background-color: #f4f6f9; margin: 0; padding: 20px; color: #333; display: flex; justify-content: center; }
+    * { 
+      box-sizing: border-box; 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+      -webkit-tap-highlight-color: transparent; /* 터치 시 반짝임 방지 */
+    }
+    html, body {
+      overscroll-behavior: none; /* 바운스 스크롤 방지 */
+    }
+    body { 
+      background-color: #f4f6f9; 
+      margin: 0; 
+      padding: 20px; 
+      color: #333; 
+      display: flex; 
+      justify-content: center; 
+    }
     .container { width: 100%; max-width: 480px; }
     .header { text-align: center; margin-bottom: 20px; }
     .header h1 { margin: 0; font-size: 22px; color: #1a1a1a; display: flex; align-items: center; justify-content: center; gap: 8px; }
@@ -23,8 +37,19 @@
     .meal-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
     .meal-items { line-height: 1.7; font-size: 14px; color: #444; }
     .nav { display: flex; gap: 10px; margin-top: 20px; }
-    .nav-btn { flex: 1; padding: 12px; border: none; background: #e0e0e0; border-radius: 10px; font-weight: bold; font-size: 14px; cursor: pointer; }
-    .nav-btn:hover { background: #dddddd; }
+    .nav-btn { 
+      flex: 1; 
+      padding: 12px; 
+      border: none; 
+      background: #e0e0e0; 
+      border-radius: 10px; 
+      font-weight: bold; 
+      font-size: 14px; 
+      cursor: pointer; 
+      user-select: none; /* 버튼 연속 클릭 시 텍스트 드래그 방지 */
+      touch-action: manipulation; /* 터치 반응속도 개선 및 더블탭 줌 방지 */
+    }
+    .nav-btn:active { background: #d0d0d0; }
     .no-menu { color: #888; font-size: 15px; text-align: center; padding: 30px 0; font-weight: 500; }
   </style>
 </head>
@@ -39,9 +64,9 @@
     <div id="menu-container"></div>
 
     <div class="nav">
-      <button class="nav-btn" onclick="changeDate(-1)">◀ 이전날</button>
-      <button class="nav-btn" onclick="goToday()">오늘</button>
-      <button class="nav-btn" onclick="changeDate(1)">다음날 ▶</button>
+      <button type="button" class="nav-btn" onclick="changeDate(-1, event)">◀ 이전날</button>
+      <button type="button" class="nav-btn" onclick="goToday(event)">오늘</button>
+      <button type="button" class="nav-btn" onclick="changeDate(1, event)">다음날 ▶</button>
     </div>
   </div>
 
@@ -85,7 +110,7 @@
 
       container.innerHTML = '';
 
-      // 토요일(6)이나 일요일(0)인 경우 카드 자체를 아예 표시하지 않음
+      // 주말(토/일)은 아무 카드도 띄우지 않음
       if (dayOfWeek === 0 || dayOfWeek === 6) {
         return;
       }
@@ -115,12 +140,20 @@
       }
     }
 
-    function changeDate(offset) {
+    function changeDate(offset, event) {
+      if (event) {
+        event.preventDefault(); // 기본 스크롤/포커스 동작 방지
+        event.target.blur();    // 버튼 포커스 해제
+      }
       currentDate.setDate(currentDate.getDate() + offset);
       renderMenu();
     }
 
-    function goToday() {
+    function goToday(event) {
+      if (event) {
+        event.preventDefault();
+        event.target.blur();
+      }
       currentDate = new Date();
       renderMenu();
     }
