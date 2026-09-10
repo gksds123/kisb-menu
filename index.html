@@ -11,8 +11,9 @@
     header { text-align: center; margin-bottom: 20px; }
     header h1 { font-size: 1.5rem; color: #1a1a1a; display: flex; align-items: center; justify-content: center; gap: 8px; }
     header p { font-size: 0.85rem; color: #666; margin-top: 4px; }
-    .date-picker-container { background: white; padding: 12px 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-    .date-picker-container input { font-size: 1rem; font-weight: bold; border: none; outline: none; background: transparent; cursor: pointer; text-align: center; color: #2c3e50; }
+    
+    .date-display { background: white; padding: 12px 24px; border-radius: 20px; font-size: 1.1rem; font-weight: bold; color: #2c3e50; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px; text-align: center; width: 100%; max-width: 400px; }
+    
     .card-container { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 15px; }
     .card { background: white; padding: 20px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
     .card h2 { font-size: 1.1rem; color: #4a90e2; margin-bottom: 10px; border-bottom: 2px solid #edf2f7; padding-bottom: 8px; }
@@ -27,63 +28,58 @@
     <p>방콕한국국제학교</p>
   </header>
 
-  <div class="date-picker-container">
-    <input type="date" id="menu-date">
-  </div>
+  <div class="date-display" id="date-display"></div>
 
-  <div class="card-container" id="menu-content">
-    <!-- 급식 내용이 나타납니다 -->
-  </div>
+  <div class="card-container" id="menu-container"></div>
 
   <script>
-    let menuData = {};
+    const days = ['일', '월', '화', '수', '목', '금', '토'];
 
-    function getTodayString() {
-      const today = new Date();
-      const year = today.getFullYear();
-      const month = String(today.getMonth() + 1).padStart(2, '0');
-      const day = String(today.getDate()).padStart(2, '0');
-      return `${year}-${month}-${day}`;
+    function formatDate(date) {
+      const yyyy = date.getFullYear();
+      const mm = String(date.getMonth() + 1).padStart(2, '0');
+      const dd = String(date.getDate()).padStart(2, '0');
+      const dayName = days[date.getDay()];
+      return {
+        key: `${yyyy}-${mm}-${dd}`,
+        display: `${yyyy}-${mm}-${dd} (${dayName})`
+      };
     }
 
-    async function initApp() {
-      const dateInput = document.getElementById('menu-date');
-      dateInput.value = getTodayString();
+    async function loadMenu() {
+      const today = new Date();
+      const dateInfo = formatDate(today);
+      
+      document.getElementById('date-display').innerText = dateInfo.display;
 
       try {
         const response = await fetch('menu.json?t=' + new Date().getTime());
-        menuData = await response.json();
-      } catch (error) {
-        console.error('menu.json 로드 실패:', error);
-      }
+        const data = await response.json();
+        const menu = data[dateInfo.key];
 
-      renderMenu();
-      dateInput.addEventListener('change', renderMenu);
+        const container = document.getElementById('menu-container');
+
+        if (!menu) {
+          container.innerHTML = `<div class="card no-menu"><p>등록된 급식이 없습니다.</p></div>`;
+          return;
+        }
+
+        container.innerHTML = `
+          <div class="card">
+            <h2>🍳 조식</h2>
+            <p>${menu.breakfast || '조식 정보가 없습니다.'}</p>
+          </div>
+          <div class="card">
+            <h2>🍱 중식</h2>
+            <p>${menu.lunch || '중식 정보가 없습니다.'}</p>
+          </div>
+        `;
+      } catch (err) {
+        console.error(err);
+      }
     }
 
-    function renderMenu() {
-      const selectedDate = document.getElementById('menu-date').value;
-      const contentDiv = document.getElementById('menu-content');
-      const dayData = menuData[selectedDate];
-
-      if (!dayData) {
-        contentDiv.innerHTML = `<div class="card no-menu"><p>등록된 급식이 없습니다.</p></div>`;
-        return;
-      }
-
-      contentDiv.innerHTML = `
-        <div class="card">
-          <h2>🍳 조식</h2>
-          <p>${dayData.breakfast || '조식 정보가 없습니다.'}</p>
-        </div>
-        <div class="card">
-          <h2>🍱 중식</h2>
-          <p>${dayData.lunch || '중식 정보가 없습니다.'}</p>
-        </div>
-      `;
-    }
-
-    document.addEventListener('DOMContentLoaded', initApp);
+    loadMenu();
   </script>
 </body>
 </html>
