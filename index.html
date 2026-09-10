@@ -1,200 +1,89 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KISB 오늘의 급식</title>
-
-  <!-- iOS PWA 설정 및 manifest 연결 -->
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="KISB 급식" />
-  <link rel="manifest" href="./manifest.json" />
-
+  <link rel="manifest" href="manifest.json">
   <style>
-    * { 
-      box-sizing: border-box; 
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-    }
-    html, body {
-      overscroll-behavior: none;
-      height: 100%;
-    }
-    body { 
-      background-color: #f4f6f9; 
-      margin: 0; 
-      padding: 20px; 
-      color: #333; 
-      display: flex; 
-      justify-content: center; 
-    }
-    .container { 
-      width: 100%; 
-      max-width: 480px; 
-      display: flex;
-      flex-direction: column;
-    }
-    .header { text-align: center; margin-bottom: 20px; }
-    .header h1 { margin: 0; font-size: 22px; color: #1a1a1a; display: flex; align-items: center; justify-content: center; gap: 8px; }
-    .header p { margin: 5px 0 0; font-size: 13px; color: #666; }
-    
-    .date-card { 
-      background: #fff; 
-      padding: 12px 16px; 
-      border-radius: 12px; 
-      text-align: center; 
-      font-weight: bold; 
-      font-size: 16px; 
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05); 
-      margin-bottom: 16px; 
-      color: #2c3e50; 
-    }
-
-    #menu-container {
-      min-height: 320px;
-    }
-
-    .meal-card { 
-      background: #fff; 
-      border-radius: 16px; 
-      padding: 18px; 
-      margin-bottom: 16px; 
-      box-shadow: 0 2px 10px rgba(0,0,0,0.04); 
-    }
-    .meal-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
-    .meal-items { line-height: 1.7; font-size: 14px; color: #444; }
-    
-    .nav { 
-      display: flex; 
-      gap: 10px; 
-      margin-top: auto; 
-      padding-top: 10px;
-    }
-    .nav-btn { 
-      flex: 1; 
-      padding: 14px 0; 
-      border: none; 
-      background: #4a90e2; 
-      color: white;
-      border-radius: 12px; 
-      font-weight: bold; 
-      font-size: 15px; 
-      cursor: pointer; 
-      touch-action: manipulation;
-      box-shadow: 0 2px 6px rgba(74, 144, 226, 0.3);
-    }
-    .nav-btn:active { background: #357abd; }
-    .no-menu { color: #888; font-size: 15px; text-align: center; padding: 40px 0; font-weight: 500; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: #f4f6f8; color: #333; display: flex; flex-direction: column; align-items: center; padding: 20px; min-height: 100vh; }
+    header { text-align: center; margin-bottom: 20px; }
+    header h1 { font-size: 1.5rem; color: #1a1a1a; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    header p { font-size: 0.85rem; color: #666; margin-top: 4px; }
+    .date-picker-container { background: white; padding: 12px 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .date-picker-container input { font-size: 1rem; font-weight: bold; border: none; outline: none; background: transparent; cursor: pointer; text-align: center; color: #2c3e50; }
+    .card-container { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 15px; }
+    .card { background: white; padding: 20px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .card h2 { font-size: 1.1rem; color: #4a90e2; margin-bottom: 10px; border-bottom: 2px solid #edf2f7; padding-bottom: 8px; }
+    .card p { font-size: 0.95rem; line-height: 1.6; color: #4a5568; word-break: keep-all; }
+    .no-menu { text-align: center; color: #a0aec0; padding: 30px; }
   </style>
-  <link rel="manifest" href="/kisb-menu/manifest.json" />
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>🍱 KISB 오늘의 급식</h1>
-      <p>방콕한국국제학교</p>
-    </div>
 
-    <div class="date-card" id="date-display">로딩 중...</div>
-    <div id="menu-container"></div>
+  <header>
+    <h1>🍱 KISB 오늘의 급식</h1>
+    <p>방콕한국국제학교</p>
+  </header>
 
-    <div class="nav">
-      <button type="button" class="nav-btn" onpointerdown="changeDate(-1, event)">◀ 이전날</button>
-      <button type="button" class="nav-btn" onpointerdown="goToday(event)">오늘</button>
-      <button type="button" class="nav-btn" onpointerdown="changeDate(1, event)">다음날 ▶</button>
-    </div>
+  <div class="date-picker-container">
+    <input type="date" id="menu-date">
+  </div>
+
+  <div class="card-container" id="menu-content">
+    <!-- 급식 내용이 나타납니다 -->
   </div>
 
   <script>
-    let currentDate = new Date();
-    let allData = {};
+    let menuData = {};
 
-    fetch('./menu.json?v=' + new Date().getTime())
-      .then(res => res.json())
-      .then(data => {
-        allData = data;
-        renderMenu();
-      })
-      .catch(err => {
-        console.error('메뉴 데이터를 불러오지 못했습니다:', err);
-      });
-
-    function formatDateKey(date) {
-      const yyyy = date.getFullYear();
-      const mm = String(date.getMonth() + 1).padStart(2, '0');
-      const dd = String(date.getDate()).padStart(2, '0');
-      return `${yyyy}-${mm}-${dd}`;
+    function getTodayString() {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      const day = String(today.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
     }
 
-    function formatDateDisplay(date) {
-      const days = ['일', '월', '화', '수', '목', '금', '토'];
-      const yyyy = date.getFullYear();
-      const mm = String(date.getMonth() + 1).padStart(2, '0');
-      const dd = String(date.getDate()).padStart(2, '0');
-      const dayName = days[date.getDay()];
-      return `${yyyy}-${mm}-${dd} (${dayName})`;
+    async function initApp() {
+      const dateInput = document.getElementById('menu-date');
+      dateInput.value = getTodayString();
+
+      try {
+        const response = await fetch('menu.json?t=' + new Date().getTime());
+        menuData = await response.json();
+      } catch (error) {
+        console.error('menu.json 로드 실패:', error);
+      }
+
+      renderMenu();
+      dateInput.addEventListener('change', renderMenu);
     }
 
     function renderMenu() {
-      const container = document.getElementById('menu-container');
-      const dateDisplay = document.getElementById('date-display');
-      
-      dateDisplay.innerText = formatDateDisplay(currentDate);
-      const dateKey = formatDateKey(currentDate);
-      const dayOfWeek = currentDate.getDay();
+      const selectedDate = document.getElementById('menu-date').value;
+      const contentDiv = document.getElementById('menu-content');
+      const dayData = menuData[selectedDate];
 
-      container.innerHTML = '';
-
-      if (dayOfWeek === 0 || dayOfWeek === 6) {
-        container.innerHTML = '<div class="meal-card no-menu">주말에는 급식이 제공되지 않습니다.</div>';
+      if (!dayData) {
+        contentDiv.innerHTML = `<div class="card no-menu"><p>등록된 급식이 없습니다.</p></div>`;
         return;
       }
 
-      const todayMenu = allData[dateKey];
-
-      if (!todayMenu) {
-        container.innerHTML = '<div class="meal-card no-menu">등록된 급식 정보가 없습니다.</div>';
-        return;
-      }
-
-      for (const [mealType, items] of Object.entries(todayMenu)) {
-        if (!items || items.length === 0) continue;
-        
-        let icon = '🍚';
-        if (mealType.includes('간식')) icon = '🥛';
-        else if (mealType.includes('중식')) icon = '🍱';
-        else if (mealType.includes('석식')) icon = '🌙';
-
-        const card = document.createElement('div');
-        card.className = 'meal-card';
-        card.innerHTML = `
-          <div class="meal-title">${icon} ${mealType}</div>
-          <div class="meal-items">${items.join('<br>')}</div>
-        `;
-        container.appendChild(card);
-      }
+      contentDiv.innerHTML = `
+        <div class="card">
+          <h2>🍳 조식</h2>
+          <p>${dayData.breakfast || '조식 정보가 없습니다.'}</p>
+        </div>
+        <div class="card">
+          <h2>🍱 중식</h2>
+          <p>${dayData.lunch || '중식 정보가 없습니다.'}</p>
+        </div>
+      `;
     }
 
-    function changeDate(offset, event) {
-      if (event) event.preventDefault();
-      currentDate.setDate(currentDate.getDate() + offset);
-      renderMenu();
-    }
-
-    function goToday(event) {
-      if (event) event.preventDefault();
-      currentDate = new Date();
-      renderMenu();
-    }
-
-    // 서비스 워커 등록 (PWA 최적화)
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW 실패:', err));
-      });
-    }
+    document.addEventListener('DOMContentLoaded', initApp);
   </script>
 </body>
 </html>
