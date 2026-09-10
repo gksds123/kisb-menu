@@ -1,13 +1,3 @@
-아, 원인을 찾았습니다!
-
-자바스크립트 코드에서 접속했을 때 진짜 오늘 날짜를 기준으로 불러오는 명령어가 아니라 menu.json에 있는 가장 첫 번째 날짜(2026-09-01)를 불러오도록 고정된 코드가 들어있어서 그렇습니다.
-
-오늘이 9월 10일이면 2026-09-10이 바로 뜨도록 자바스크립트 초기화 로직을 확실하게 수정해 드립니다.
-
-해결 방법 (index.html 하단 <script> 부분 수정)
-index.html 파일 전체를 통째로 아래 코드로 덮어씌워 주세요. 접속하는 순간 사용자의 현재 기기 날짜(오늘)를 계산해서 화면에 뿌려주도록 바꿨습니다.
-
-HTML
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -56,15 +46,13 @@ HTML
   </div>
 
   <script>
-    // 오늘 날짜로 무조건 초기화
     let currentDate = new Date();
     let allData = {};
 
-    fetch('./menu.json')
+    fetch('./menu.json?v=' + new Date().getTime())
       .then(res => res.json())
       .then(data => {
         allData = data;
-        // 데이터를 받아오자마자 현재 오늘 날짜 화면을 렌더링
         renderMenu();
       })
       .catch(err => {
@@ -131,4 +119,3 @@ HTML
     }
   </script>
 </body>
-</html>
