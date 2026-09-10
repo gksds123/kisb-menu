@@ -48,6 +48,22 @@
   </div>
 
   <script>
+    // 기존 서비스 워커 및 캐시 강제 삭제 (이전 버전 캐싱 방지)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+    if ('caches' in window) {
+      caches.keys().then(function(names) {
+        for (let name of names) {
+          caches.delete(name);
+        }
+      });
+    }
+
     const days = ['일', '월', '화', '수', '목', '금', '토'];
     let currentDate = new Date();
     let menuData = {};
@@ -67,8 +83,7 @@
 
     async function fetchMenu() {
       try {
-        // 캐시 방지를 위해 요청 시 타임스탬프와 cache: 'no-store' 옵션 추가
-        const response = await fetch('menu.json?v=' + Date.now(), { cache: 'no-store' });
+        const response = await fetch('menu.json?t=' + Date.now(), { cache: 'no-store' });
         menuData = await response.json();
         render();
       } catch (err) {
