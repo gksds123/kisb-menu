@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>KISB 오늘의 급식</title>
   <link rel="manifest" href="manifest.json">
   <style>
@@ -45,6 +48,12 @@
   </div>
 
   <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js?v=' + Date.now()).then(reg => {
+        reg.update();
+      });
+    }
+
     const days = ['일', '월', '화', '수', '목', '금', '토'];
     let currentDate = new Date();
     let menuData = {};
@@ -64,8 +73,7 @@
 
     async function fetchMenu() {
       try {
-        // 캐시 방지를 위해 매번 고유한 타임스탬프를 붙여서 menu.json 요청
-        const response = await fetch('menu.json?t=' + new Date().getTime());
+        const response = await fetch('./menu.json?v=' + Date.now(), { cache: 'no-store' });
         menuData = await response.json();
         render();
       } catch (err) {
