@@ -1,16 +1,9 @@
 {
-  "name": "KISB 오늘의 급식",
-  "short_name": "KISB 급식",
-  "start_url": "./",
+  "name": "KISB 급식",
+  "short_name": "KISB급식",
+  "start_url": "/kisb-menu/",
+  "scope": "/kisb-menu/",
   "display": "standalone",
-  "background_color": "#f2f4f7",
-  "theme_color": "#ffffff",
-  "icons": [
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/3405/3405771.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ]
+  "background_color": "#ffffff",
+  "theme_color": "#4a90e2"
 }
