@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KISB 오늘의 급식</title>
+
+  <!-- PWA 앱 설정 -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="KISB 급식">
+  <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3405/3405771.png">
+
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -13,6 +22,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      -webkit-user-select: none;
+      user-select: none;
     }
     .header { text-align: center; margin-bottom: 24px; }
     .header h1 { font-size: 24px; margin: 0 0 4px 0; color: #111; display: flex; align-items: center; justify-content: center; gap: 8px; }
@@ -47,7 +58,7 @@
     <p>방콕한국국제학교</p>
   </div>
 
-  <div class="date-title" id="date-display">2026년 9월 11일 (금)</div>
+  <div class="date-title" id="date-display">2026년 9월 1일 (화)</div>
 
   <div class="card-list" id="menu-container"></div>
 
