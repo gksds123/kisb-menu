@@ -1,7 +1,7 @@
 {
   "name": "KISB 오늘의 급식",
   "short_name": "KISB 급식",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#f2f4f7",
   "theme_color": "#ffffff",
