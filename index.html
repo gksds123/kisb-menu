@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>KISB 오늘의 급식</title>
   <link rel="manifest" href="manifest.json">
   <style>
@@ -64,7 +67,8 @@
 
     async function fetchMenu() {
       try {
-        const response = await fetch('menu.json?t=' + new Date().getTime());
+        // 캐시 방지를 위해 요청 시 타임스탬프와 cache: 'no-store' 옵션 추가
+        const response = await fetch('menu.json?v=' + Date.now(), { cache: 'no-store' });
         menuData = await response.json();
         render();
       } catch (err) {
