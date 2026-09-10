@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KISB 오늘의 급식</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #f2f4f7;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .header { text-align: center; margin-bottom: 24px; }
+    .header h1 { font-size: 24px; margin: 0 0 4px 0; color: #111; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .header p { margin: 0; color: #777; font-size: 14px; }
+    .date-title { font-size: 20px; font-weight: bold; margin-bottom: 20px; color: #222; }
+    
+    .card-list { width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 16px; }
+    .card { background: #ffffff; border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); }
+    .card-title { font-size: 18px; font-weight: bold; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; color: #111; }
+    .card-item { font-size: 15px; color: #444; margin-bottom: 6px; line-height: 1.5; }
+    
+    .nav-buttons { display: flex; gap: 8px; width: 100%; max-width: 420px; margin-top: 24px; }
+    .nav-btn {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #eaeaea;
+      color: #333;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .nav-btn:hover { background: #dddddd; }
+    .no-menu { color: #888; font-size: 15px; text-align: center; padding: 20px 0; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>🍽️ KISB 오늘의 급식</h1>
+    <p>방콕한국국제학교</p>
+  </div>
+
+  <div class="date-title" id="date-display">2026년 9월 11일 (금)</div>
+
+  <div class="card-list" id="menu-container"></div>
+
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="changeDate(-1)">◀ 이전날</button>
+    <button class="nav-btn" onclick="goToday()">오늘</button>
+    <button class="nav-btn" onclick="changeDate(1)">다음날 ▶</button>
+  </div>
+
+  <script>
+    let allData = [];
+    let currentIndex = 0;
+
+    fetch('menu.json')
+      .then(res => res.json())
+      .then(data => {
+        allData = data;
+        renderMenu();
+      });
+
+    function renderMenu() {
+      const container = document.getElementById('menu-container');
+      const dateDisplay = document.getElementById('date-display');
+      
+      if (!allData || allData.length === 0) {
+        container.innerHTML = '<div class="card no-menu">등록된 급식 정보가 없습니다.</div>';
+        return;
+      }
+
+      const current = allData[currentIndex];
+      dateDisplay.innerText = current.date;
+
+      let html = '';
+      current.meals.forEach(meal => {
+        const icon = meal.type === '간식' ? '🥛' : '🍱';
+        html += `
+          <div class="card">
+            <div class="card-title">${icon} ${meal.type}</div>
+            ${meal.items.map(item => `<div class="card-item">${item}</div>`).join('')}
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function changeDate(offset) {
+      if (currentIndex + offset >= 0 && currentIndex + offset < allData.length) {
+        currentIndex += offset;
+        renderMenu();
+      } else {
+        alert('더 이상 등록된 급식 정보가 없습니다!');
+      }
+    }
+
+    function goToday() {
+      currentIndex = 0;
+      renderMenu();
+    }
+  </script>
+</body>
+</html>
