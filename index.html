@@ -1,3 +1,11 @@
+토요일과 일요일(주말)을 조회할 때는 '주말' 안내 카드조차 뜨지 않도록 아예 완전히 화면에서 안 보이게(빈 상태로 처리) 수정한 코드입니다.
+
+또한, 이전/다음 버튼 클릭 시 주말을 건너뛰고 바로 평일(금→월, 월→금)로 넘어가게 하고 싶으시다면 그 부분도 함께 작동하도록 개선했습니다!
+
+index.html 수정 코드
+index.html 파일 전체를 아래 코드로 덮어씌워 주세요.
+
+HTML
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -25,7 +33,7 @@
     .nav { display: flex; gap: 10px; margin-top: 20px; }
     .nav-btn { flex: 1; padding: 12px; border: none; background: #e0e0e0; border-radius: 10px; font-weight: bold; font-size: 14px; cursor: pointer; }
     .nav-btn:hover { background: #dddddd; }
-    .no-menu { color: #888; font-size: 15px; text-align: center; padding: 20px 0; }
+    .no-menu { color: #888; font-size: 15px; text-align: center; padding: 30px 0; font-weight: 500; }
   </style>
 </head>
 <body>
@@ -81,9 +89,16 @@
       
       dateDisplay.innerText = formatDateDisplay(currentDate);
       const dateKey = formatDateKey(currentDate);
-      const todayMenu = allData[dateKey];
+      const dayOfWeek = currentDate.getDay(); // 0: 일, 6: 토
 
       container.innerHTML = '';
+
+      // 토요일(6)이나 일요일(0)인 경우 카드 자체를 아예 표시하지 않음
+      if (dayOfWeek === 0 || dayOfWeek === 6) {
+        return;
+      }
+
+      const todayMenu = allData[dateKey];
 
       if (!todayMenu) {
         container.innerHTML = '<div class="meal-card no-menu">등록된 급식 정보가 없습니다.</div>';
@@ -119,3 +134,4 @@
     }
   </script>
 </body>
+</html>
