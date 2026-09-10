@@ -64,6 +64,7 @@
 
     async function fetchMenu() {
       try {
+        // 캐시 방지를 위해 매번 고유한 타임스탬프를 붙여서 menu.json 요청
         const response = await fetch('menu.json?t=' + new Date().getTime());
         menuData = await response.json();
         render();
