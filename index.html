@@ -46,6 +46,7 @@
   </div>
 
   <script>
+    // 접속 시 현재 디바이스의 실제 오늘 날짜로 초기화
     let currentDate = new Date();
     let allData = {};
 
@@ -59,6 +60,7 @@
         console.error('메뉴 데이터를 불러오지 못했습니다:', err);
       });
 
+    // YYYY-MM-DD 형태로 변환하는 함수 (자신의 로컬 시간대 기준)
     function formatDateKey(date) {
       const yyyy = date.getFullYear();
       const mm = String(date.getMonth() + 1).padStart(2, '0');
@@ -119,4 +121,3 @@
     }
   </script>
 </body>
-</html>
