@@ -7,33 +7,47 @@
   <link rel="manifest" href="manifest.json">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: #f4f6f8; color: #333; display: flex; flex-direction: column; align-items: center; padding: 20px; min-height: 100vh; }
+    body { background-color: #f4f6f8; color: #333; display: flex; flex-direction: column; align-items: center; padding: 20px; min-height: 100vh; justify-content: space-between; }
     header { text-align: center; margin-bottom: 20px; }
     header h1 { font-size: 1.5rem; color: #1a1a1a; display: flex; align-items: center; justify-content: center; gap: 8px; }
     header p { font-size: 0.85rem; color: #666; margin-top: 4px; }
     
     .date-display { background: white; padding: 12px 24px; border-radius: 20px; font-size: 1.1rem; font-weight: bold; color: #2c3e50; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px; text-align: center; width: 100%; max-width: 400px; }
     
-    .card-container { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 15px; }
+    .card-container { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 15px; flex-grow: 1; }
     .card { background: white; padding: 20px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
     .card h2 { font-size: 1.1rem; color: #4a90e2; margin-bottom: 10px; border-bottom: 2px solid #edf2f7; padding-bottom: 8px; }
     .card p { font-size: 0.95rem; line-height: 1.6; color: #4a5568; word-break: keep-all; }
     .no-menu { text-align: center; color: #a0aec0; padding: 30px; }
+
+    .nav-buttons { display: flex; gap: 10px; width: 100%; max-width: 400px; margin-top: 20px; }
+    .nav-btn { flex: 1; padding: 12px; border: none; border-radius: 12px; background-color: #4a90e2; color: white; font-weight: bold; font-size: 0.95rem; cursor: pointer; transition: background 0.2s; }
+    .nav-btn:active { background-color: #357abd; }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>🍱 KISB 오늘의 급식</h1>
-    <p>방콕한국국제학교</p>
-  </header>
+  <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+    <header>
+      <h1>🍱 KISB 오늘의 급식</h1>
+      <p>방콕한국국제학교</p>
+    </header>
 
-  <div class="date-display" id="date-display"></div>
+    <div class="date-display" id="date-display">로딩 중...</div>
 
-  <div class="card-container" id="menu-container"></div>
+    <div class="card-container" id="menu-container"></div>
+  </div>
+
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="changeDate(-1)">◀ 이전날</button>
+    <button class="nav-btn" onclick="goToday()">오늘</button>
+    <button class="nav-btn" onclick="changeDate(1)">다음날 ▶</button>
+  </div>
 
   <script>
     const days = ['일', '월', '화', '수', '목', '금', '토'];
+    let currentDate = new Date();
+    let menuData = {};
 
     function formatDate(date) {
       const yyyy = date.getFullYear();
@@ -46,40 +60,52 @@
       };
     }
 
-    async function loadMenu() {
-      const today = new Date();
-      const dateInfo = formatDate(today);
-      
-      document.getElementById('date-display').innerText = dateInfo.display;
-
+    async function fetchMenu() {
       try {
         const response = await fetch('menu.json?t=' + new Date().getTime());
-        const data = await response.json();
-        const menu = data[dateInfo.key];
-
-        const container = document.getElementById('menu-container');
-
-        if (!menu) {
-          container.innerHTML = `<div class="card no-menu"><p>등록된 급식이 없습니다.</p></div>`;
-          return;
-        }
-
-        container.innerHTML = `
-          <div class="card">
-            <h2>🍳 조식</h2>
-            <p>${menu.breakfast || '조식 정보가 없습니다.'}</p>
-          </div>
-          <div class="card">
-            <h2>🍱 중식</h2>
-            <p>${menu.lunch || '중식 정보가 없습니다.'}</p>
-          </div>
-        `;
+        menuData = await response.json();
+        render();
       } catch (err) {
-        console.error(err);
+        console.error('메뉴 로드 에러:', err);
+        document.getElementById('menu-container').innerHTML = `<div class="card no-menu"><p>데이터를 불러오지 못했습니다.</p></div>`;
       }
     }
 
-    loadMenu();
+    function render() {
+      const dateInfo = formatDate(currentDate);
+      document.getElementById('date-display').innerText = dateInfo.display;
+
+      const menu = menuData[dateInfo.key];
+      const container = document.getElementById('menu-container');
+
+      if (!menu) {
+        container.innerHTML = `<div class="card no-menu"><p>등록된 급식이 없습니다.</p></div>`;
+        return;
+      }
+
+      container.innerHTML = `
+        <div class="card">
+          <h2>🍳 조식</h2>
+          <p>${menu.breakfast || '조식 정보가 없습니다.'}</p>
+        </div>
+        <div class="card">
+          <h2>🍱 중식</h2>
+          <p>${menu.lunch || '중식 정보가 없습니다.'}</p>
+        </div>
+      `;
+    }
+
+    function changeDate(offset) {
+      currentDate.setDate(currentDate.getDate() + offset);
+      render();
+    }
+
+    function goToday() {
+      currentDate = new Date();
+      render();
+    }
+
+    fetchMenu();
   </script>
 </body>
 </html>
