@@ -6,11 +6,15 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>KISB 오늘의 급식</title>
+  <title>KISB 오늘의 급식 / KISB School Lunch</title>
   <link rel="manifest" href="manifest.json">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background-color: #f4f6f8; color: #333; display: flex; flex-direction: column; align-items: center; padding: 20px; min-height: 100vh; justify-content: space-between; }
+    
+    .top-bar { width: 100%; max-width: 400px; display: flex; justify-content: flex-end; margin-bottom: 10px; }
+    .lang-btn { background: #ffffff; border: 1px solid #cbd5e0; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; color: #4a5568; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+
     header { text-align: center; margin-bottom: 20px; }
     header h1 { font-size: 1.5rem; color: #1a1a1a; display: flex; align-items: center; justify-content: center; gap: 8px; }
     header p { font-size: 0.85rem; color: #666; margin-top: 4px; }
@@ -31,9 +35,13 @@
 <body>
 
   <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+    <div class="top-bar">
+      <button class="lang-btn" id="lang-toggle" onclick="toggleLanguage()">🌐 English</button>
+    </div>
+
     <header>
-      <h1>🍱 KISB 오늘의 급식</h1>
-      <p>방콕한국국제학교</p>
+      <h1 id="ui-title">🍱 KISB 오늘의 급식</h1>
+      <p id="ui-subtitle">방콕한국국제학교</p>
     </header>
 
     <div class="date-display" id="date-display">로딩 중...</div>
@@ -42,28 +50,79 @@
   </div>
 
   <div class="nav-buttons">
-    <button class="nav-btn" onclick="changeDate(-1)">◀ 이전날</button>
-    <button class="nav-btn" onclick="goToday()">오늘</button>
-    <button class="nav-btn" onclick="changeDate(1)">다음날 ▶</button>
+    <button class="nav-btn" id="btn-prev" onclick="changeDate(-1)">◀ 이전날</button>
+    <button class="nav-btn" id="btn-today" onclick="goToday()">오늘</button>
+    <button class="nav-btn" id="btn-next" onclick="changeDate(1)">다음날 ▶</button>
   </div>
 
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js?v=' + Date.now()).then(reg => {
-        reg.update();
+      navigator.serviceWorker.getRegistrations().then(registrations => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
       });
     }
 
-    const days = ['일', '월', '화', '수', '목', '금', '토'];
+    const i18n = {
+      ko: {
+        title: '🍱 KISB 오늘의 급식',
+        subtitle: '방콕한국국제학교',
+        prev: '◀ 이전날',
+        today: '오늘',
+        next: '다음날 ▶',
+        weekend: '토일은 주말이에용',
+        noMenu: '등록된 급식이 없습니다.',
+        error: '데이터를 불러오지 못했습니다.',
+        breakfast: '🍳 조식/간식',
+        lunch: '🍱 중식',
+        noInfo: '정보가 없습니다.',
+        days: ['일', '월', '화', '수', '목', '금', '토'],
+        langBtn: '🌐 English'
+      },
+      en: {
+        title: '🍱 KISB Daily Menu',
+        subtitle: 'Korean International School Bangkok',
+        prev: '◀ Prev',
+        today: 'Today',
+        next: 'Next ▶',
+        weekend: 'It is the weekend!',
+        noMenu: 'No menu registered.',
+        error: 'Failed to load data.',
+        breakfast: '🍳 Breakfast / Snack',
+        lunch: '🍱 Lunch',
+        noInfo: 'No information available.',
+        days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        langBtn: '🌐 한국어'
+      }
+    };
+
+    let currentLang = 'ko';
     let currentDate = new Date();
     let menuData = {};
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'ko' ? 'en' : 'ko';
+      updateUIStrings();
+      render();
+    }
+
+    function updateUIStrings() {
+      const lang = i18n[currentLang];
+      document.getElementById('ui-title').innerText = lang.title;
+      document.getElementById('ui-subtitle').innerText = lang.subtitle;
+      document.getElementById('btn-prev').innerText = lang.prev;
+      document.getElementById('btn-today').innerText = lang.today;
+      document.getElementById('btn-next').innerText = lang.next;
+      document.getElementById('lang-toggle').innerText = lang.langBtn;
+    }
 
     function formatDate(date) {
       const yyyy = date.getFullYear();
       const mm = String(date.getMonth() + 1).padStart(2, '0');
       const dd = String(date.getDate()).padStart(2, '0');
       const dayNum = date.getDay();
-      const dayName = days[dayNum];
+      const dayName = i18n[currentLang].days[dayNum];
       return {
         key: `${yyyy}-${mm}-${dd}`,
         display: `${yyyy}-${mm}-${dd} (${dayName})`,
@@ -78,36 +137,41 @@
         render();
       } catch (err) {
         console.error('메뉴 로드 에러:', err);
-        document.getElementById('menu-container').innerHTML = `<div class="card no-menu"><p>데이터를 불러오지 못했습니다.</p></div>`;
+        document.getElementById('menu-container').innerHTML = `<div class="card no-menu"><p>${i18n[currentLang].error}</p></div>`;
       }
     }
 
     function render() {
+      const lang = i18n[currentLang];
       const dateInfo = formatDate(currentDate);
       document.getElementById('date-display').innerText = dateInfo.display;
 
       const container = document.getElementById('menu-container');
 
       if (dateInfo.isWeekend) {
-        container.innerHTML = `<div class="card no-menu"><p>토일은 주말이에용</p></div>`;
+        container.innerHTML = `<div class="card no-menu"><p>${lang.weekend}</p></div>`;
         return;
       }
 
       const menu = menuData[dateInfo.key];
 
       if (!menu) {
-        container.innerHTML = `<div class="card no-menu"><p>등록된 급식이 없습니다.</p></div>`;
+        container.innerHTML = `<div class="card no-menu"><p>${lang.noMenu}</p></div>`;
         return;
       }
 
+      // menu.json에 breakfast_en / lunch_en이 있으면 영어일 때 해당 값을 보여주고, 없으면 기본 한글 출력
+      const breakfastText = (currentLang === 'en' && menu.breakfast_en) ? menu.breakfast_en : (menu.breakfast || lang.noInfo);
+      const lunchText = (currentLang === 'en' && menu.lunch_en) ? menu.lunch_en : (menu.lunch || lang.noInfo);
+
       container.innerHTML = `
         <div class="card">
-          <h2>🍳 조식/간식</h2>
-          <p>${menu.breakfast || '정보가 없습니다.'}</p>
+          <h2>${lang.breakfast}</h2>
+          <p>${breakfastText}</p>
         </div>
         <div class="card">
-          <h2>🍱 중식</h2>
-          <p>${menu.lunch || '정보가 없습니다.'}</p>
+          <h2>${lang.lunch}</h2>
+          <p>${lunchText}</p>
         </div>
       `;
     }
