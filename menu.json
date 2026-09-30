@@ -1,104 +1,122 @@
 {
-  "2026-09-01": {
-    "breakfast": "시리얼/우유, 떡볶이&김말이",
-    "breakfast_en": "Cereal/Milk, Tteokbokki & Deep-fried Seaweed Rolls",
-    "lunch": "현미밥, 맑은오징어국, 김치찜닭, 김가루묵무침, 오이생채/과일/쌈채소",
-    "lunch_en": "Brown Rice, Clear Squid Soup, Braised Spicy Kimchi Chicken, Acorn Jelly Salad, Cucumber Salad/Fruit/Wrap Vegetables"
-  },
-  "2026-09-02": {
-    "breakfast": "시리얼/우유, 야채죽",
-    "breakfast_en": "Cereal/Milk, Vegetable Porridge",
-    "lunch": "흑미밥, 감자된장국, 제육볶음, 새송이버섯호박볶음, 배추김치/과일/쌈채소",
-    "lunch_en": "Black Rice, Potato Soybean Paste Soup, Stir-fried Pork, Stir-fried King Oyster Mushroom & Zucchini, Cabbage Kimchi/Fruit/Wrap Vegetables"
-  },
-  "2026-09-03": {
-    "breakfast": "시리얼/우유, 게살볶음밥",
-    "breakfast_en": "Cereal/Milk, Crab Meat Fried Rice",
-    "lunch": "완두콩밥, 어묵국, 동그랑땡전, 고돌채소무침, 배추김치/과일/쌈채소",
-    "lunch_en": "Pea Rice, Fish Cake Soup, Pan-fried Meat Patties (Donggeurangttaeng), Seasoned Bitter Melon Greens, Cabbage Kimchi/Fruit/Wrap Vegetables"
-  },
-  "2026-09-04": {
-    "breakfast": "시리얼/우유, 쌀국수",
-    "breakfast_en": "Cereal/Milk, Rice Noodles (Pho)",
-    "lunch": "백미밥, 순댓국, 쌈다시마&갑오징어숙회, 감자채볶음, 깍두기/과일/쌈채소",
-    "lunch_en": "White Rice, Korean Blood Sausage Soup, Kelp Wrap & Parboiled Cuttlefish, Stir-fried Shredded Potatoes, Radish Kimchi/Fruit/Wrap Vegetables"
-  },
-  "2026-09-07": {
-    "breakfast": "시리얼/우유, 잔치국수",
-    "breakfast_en": "Cereal/Milk, Banquet Noodles (Janchi Guksu)",
-    "lunch": "보리밥, 뼈없는감자탕, 호박채전, 미역줄기볶음, 배추겉절이/과일/쌈채소",
-    "lunch_en": "Barley Rice, Boneless Pork Back-bone Stew (Gamjatang), Shredded Zucchini Pancake, Stir-fried Seaweed Stems, Fresh Cabbage Kimchi/Fruit/Wrap Vegetables"
-  },
-  "2026-09-08": {
-    "breakfast": "시리얼/우유, 감자샐러드샌드위치",
-    "breakfast_en": "Cereal/Milk, Potato Salad Sandwich",
-    "lunch": "현미밥, 차돌된장찌개, 갈치구이, 청경채침, 배추김치/과일/쌈채소",
-    "lunch_en": "Brown Rice, Beef Beef Brisket Soybean Paste Stew, Grilled Cutlassfish, Seasoned Bok Choy, Cabbage Kimchi/Fruit/Wrap Vegetables"
-  },
-  "2026-09-09": {
-    "breakfast": "시리얼/우유, 김밥볶음밥",
-    "breakfast_en": "Cereal/Milk, Gimbap Fried Rice",
-    "lunch": "흑미밥, 북어콩나물국, 아롱사태조림, 양념깻잎지, 배추김치/과일/쌈채소",
-    "lunch_en": "Black Rice, Dried Pollack & Bean Sprout Soup, Braised Beef Shank, Seasoned Pickled Perilla Leaves, Cabbage Kimchi/Fruit/Wrap Vegetables"
-  },
-  "2026-09-10": {
-    "breakfast": "시리얼/우유, 랏나",
-    "breakfast_en": "Cereal/Milk, Rat Na (Thai Gravy Noodles)",
-    "lunch": "완두콩밥, 닭곰탕, 쭈꾸미볶음&소면, 콩자반, 배추김치/과일/쌈채소",
-    "lunch_en": "Pea Rice, Chicken Soup (Dakgomtang), Stir-fried Baby Octopus with Noodles, Braised Black Soybeans, Cabbage Kimchi/Fruit/Wrap Vegetables"
-  },
-  "2026-09-11": {
-    "breakfast": "시리얼/우유, 삶은계란&그래놀라요거트컵",
-    "breakfast_en": "Cereal/Milk, Boiled Egg & Granola Yogurt Cup",
-    "lunch": "짜장라이스, 미소된장국, 깐풍기, 삼추파채무침, 배추김치/야쿠르트/쌈채소",
-    "lunch_en": "Jajang Rice, Miso Soup, Spicy Garlic Fried Chicken (Kkanpunggi), Seasoned Lettuce & Green Onion, Cabbage Kimchi/Yagurt/Wrap Vegetables"
-  },
-  "2026-09-14": {
-    "breakfast": "시리얼/우유, 누룽지&밑반찬",
-    "breakfast_en": "Cereal/Milk, Scorched Rice Soup & Side Dishes",
-    "lunch": "보리밥, 양지미역국, 생선칠리탕수, 시금치나물, 배추김치/아이스크림/쌈채소",
-    "lunch_en": "Barley Rice, Beef Brisket Seaweed Soup, Deep-fried Fish with Chili Sauce, Seasoned Spinach, Cabbage Kimchi/Ice Cream/Wrap Vegetables"
-  },
-  "2026-09-15": {
-    "breakfast": "시리얼/우유, 크림펜네파스타",
-    "breakfast_en": "Cereal/Milk, Cream Penne Pasta",
-    "lunch": "현미밥, 소고기뭇국, 참치두부조림, 한식잡채, 배추김치/과일/쌈채소",
-    "lunch_en": "Brown Rice, Beef Radish Soup, Braised Tuna & Tofu, Korean Japchae, Cabbage Kimchi/Fruit/Wrap Vegetables"
-  },
-  "2026-09-16": {
-    "breakfast": "시리얼/우유, 수제몬테크리스토",
-    "breakfast_en": "Cereal/Milk, Homemade Monte Cristo Sandwich",
-    "lunch": "흑미밥, 김칫국, 돈육불고기&양배추쌈, 김자반, 갓김치/과일/쌈채소",
-    "lunch_en": "Black Rice, Kimchi Soup, Pork Bulgogi with Cabbage Wraps, Seasoned Dried Laver, Mustard Greens Kimchi/Fruit/Wrap Vegetables"
-  },
-  "2026-09-17": {
-    "breakfast": "시리얼/우유, 베이컨마늘볶음밥",
-    "breakfast_en": "Cereal/Milk, Bacon Garlic Fried Rice",
-    "lunch": "완두콩밥, 농어매운탕, 닭간장조림, 오이양파무침, 배추김치/과일/쌈채소",
-    "lunch_en": "Pea Rice, Spicy Sea Bass Soup, Braised Soy Sauce Chicken, Seasoned Cucumber & Onion, Cabbage Kimchi/Fruit/Wrap Vegetables"
-  },
-  "2026-09-18": {
-    "breakfast": "시리얼/우유, 콘스프&크루아상",
-    "breakfast_en": "Cereal/Milk, Corn Soup & Croissant",
-    "lunch": "백미밥, 갈비탕, 모둠전, 삼색나물, 깍두기/과일/송편",
-    "lunch_en": "White Rice, Short Rib Soup (Galbitang), Assorted Pancakes (Jeon), Three-color Vegetables, Radish Kimchi/Fruit/Songpyeon"
-  },
-  "2026-09-28": {
-    "breakfast": "시리얼/우유, 프렌치토스트&청포도주스",
-    "breakfast_en": "Cereal/Milk, French Toast & Green Grape Juice",
-    "lunch": "보리밥, 새우탕, 수제돈까스, 그린샐러드, 배추김치/과일/쌈채소",
-    "lunch_en": "Barley Rice, Spicy Shrimp Soup, Homemade Pork Cutlet, Green Salad, Cabbage Kimchi/Fruit/Wrap Vegetables"
-  },
-  "2026-09-29": {
-    "breakfast": "시리얼/우유, 파켓피오우무쌈",
-    "breakfast_en": "Cereal/Milk, Pork Fajita & Pickled Radish Wrap",
+  "2026-10-01": {
+    "breakfast": "시리얼/우유, 파팟파오무쌉(타이식)",
+    "breakfast_en": "Cereal/Milk, Pad Kra Pao Moo Sap (Thai Stir-fried Pork with Basil)",
     "lunch": "현미밥, 설렁탕, 비엔나케첩볶음, 진미채볶음, 깍두기/과일/쌈채소",
     "lunch_en": "Brown Rice, Ox Bone Soup (Seollongtang), Stir-fried Vienna Sausages with Ketchup, Stir-fried Dried Squid, Radish Kimchi/Fruit/Wrap Vegetables"
   },
-  "2026-09-30": {
-    "breakfast": "시리얼/우유, 물만두국",
-    "breakfast_en": "Cereal/Milk, Small Dumpling Soup",
-    "lunch": "흑미밥, 시금치된장국, 마라불고기, 계란찜, 배추김치/과일/쌈채소",
-    "lunch_en": "Black Rice, Spinach Soybean Paste Soup, Spicy Mala Pork Bulgogi, Steamed Eggs, Cabbage Kimchi/Fruit/Wrap Vegetables"
+  "2026-10-02": {
+    "breakfast": "시리얼/우유, 샐러드빵&요거트",
+    "breakfast_en": "Cereal/Milk, Salad Bread & Yogurt",
+    "lunch": "백미밥, 새우탕, 대패삼겹김치볶음, 새송이버섯굴소스볶음, 알타리김치/과일/쌈채소",
+    "lunch_en": "White Rice, Spicy Shrimp Soup, Stir-fried Thin Pork Belly with Kimchi, Stir-fried King Oyster Mushrooms in Oyster Sauce, Altari Kimchi/Fruit/Wrap Vegetables"
+  },
+  "2026-10-05": {
+    "breakfast": "시리얼/우유, 들깨수제비",
+    "breakfast_en": "Cereal/Milk, Perilla Seed Hand-pulled Dough Soup",
+    "lunch": "보리밥, 닭곰탕, 마라불고기, 미역레몬초무침, 깍두기/과일/쌈채소",
+    "lunch_en": "Barley Rice, Chicken Soup (Dakgomtang), Spicy Mala Pork Bulgogi, Seasoned Seaweed with Lemon, Radish Kimchi/Fruit/Wrap Vegetables"
+  },
+  "2026-10-06": {
+    "breakfast": "시리얼/우유, 낙지김치죽",
+    "breakfast_en": "Cereal/Milk, Octopus & Kimchi Porridge",
+    "lunch": "비빔밥, 우거지된장국, 새우크로켓&케첩, 브로콜리무침, 배추김치/과일/쌈채소",
+    "lunch_en": "Bibimbap, Dried Cabbage Soybean Paste Soup, Shrimp Croquette with Ketchup, Seasoned Broccoli, Cabbage Kimchi/Fruit/Wrap Vegetables"
+  },
+  "2026-10-07": {
+    "breakfast": "시리얼/우유, 치아바타닭가슴살샌드위치",
+    "breakfast_en": "Cereal/Milk, Ciabatta Chicken Breast Sandwich",
+    "lunch": "완두콩밥, 양지미역국, 조기구이, 애호박볶음, 배추김치/과일/슈크림슈",
+    "lunch_en": "Pea Rice, Beef Brisket Seaweed Soup, Grilled Yellow Croaker, Stir-fried Zucchini, Cabbage Kimchi/Fruit/Choux Cream Puff"
+  },
+  "2026-10-08": {
+    "breakfast": "시리얼/우유, 팟센야이(타이식)",
+    "breakfast_en": "Cereal/Milk, Pad Sen Yai (Thai Flat Rice Noodles)",
+    "lunch": "현미밥, 참치김치찌개, 떡갈비버섯볶음, 실곤약채소무침, 청경채겉절이/과일/쌈채소",
+    "lunch_en": "Brown Rice, Tuna Kimchi Stew, Stir-fried Tteokgalbi with Mushrooms, Seasoned Konjac Noodles with Vegetables, Fresh Bok Choy Kimchi/Fruit/Wrap Vegetables"
+  },
+  "2026-10-09": {
+    "breakfast": "시리얼/우유, 돈코츠탄탄면",
+    "breakfast_en": "Cereal/Milk, Tonkotsu Tantanmen",
+    "lunch": "백미밥, 북어국, 닭살고추장데리야키, 콩빈베이컨볶음, 배추김치/과일/쌈채소",
+    "lunch_en": "White Rice, Dried Pollack Soup, Spicy Red Pepper & Teriyaki Chicken, Stir-fried Beans & Bacon, Cabbage Kimchi/Fruit/Wrap Vegetables"
+  },
+  "2026-10-12": {
+    "breakfast": "시리얼/우유, 표고닭죽",
+    "breakfast_en": "Cereal/Milk, Shiitake Mushroom & Chicken Porridge",
+    "lunch": "보리밥, 꽃게된장찌개, 수육, 박나물볶음, 배추겉절이/과일/쌈채소",
+    "lunch_en": "Barley Rice, Blue Crab Soybean Paste Stew, Boiled Pork Slices (Bossam), Stir-fried Gourd Greens, Fresh Cabbage Kimchi/Fruit/Wrap Vegetables"
+  },
+  "2026-10-14": {
+    "breakfast": "시리얼/우유, 오야코동덮밥",
+    "breakfast_en": "Cereal/Milk, Oyakodon (Chicken & Egg Rice Bowl)",
+    "lunch": "완두콩밥, 부대찌개, 양장피, 고추장계란장조림, 배추김치/과일/쌈채소",
+    "lunch_en": "Pea Rice, Army Stew (Budae Jjigae), Yangjangpi (Seafood & Vegetable Salad), Braised Eggs in Spicy Red Pepper Paste, Cabbage Kimchi/Fruit/Wrap Vegetables"
+  },
+  "2026-10-15": {
+    "breakfast": "시리얼/우유, 찐고구마&샐러드",
+    "breakfast_en": "Cereal/Milk, Steamed Sweet Potato & Salad",
+    "lunch": "현미밥, 우렁살된장찌개, 수제치즈함박, 취나물들깨무침, 배추김치/과일/쌈채소",
+    "lunch_en": "Brown Rice, Marsh Snail Soybean Paste Stew, Homemade Cheese Hamburger Steak, Seasoned Chwinamul with Perilla Seeds, Cabbage Kimchi/Fruit/Wrap Vegetables"
+  },
+  "2026-10-16": {
+    "breakfast": "시리얼/우유, 블루베리베이글&밀크티",
+    "breakfast_en": "Cereal/Milk, Blueberry Bagel & Milk Tea",
+    "lunch": "물냉면, 바싹불고기, 오이부추초무침, 배추김치, 과일/쌈채소",
+    "lunch_en": "Cold Rice Noodles (Mul-naengmyeon), Crispy Grilled Bulgogi, Seasoned Cucumber & Chives, Cabbage Kimchi, Fruit/Wrap Vegetables"
+  },
+  "2026-10-19": {
+    "breakfast": "시리얼/우유, 떡국",
+    "breakfast_en": "Cereal/Milk, Rice Cake Soup (Tteokguk)",
+    "lunch": "보리밥, 매생이계란국, 코다리콩나물찜, 어묵고추장볶음, 배추김치/과일/에그타르트",
+    "lunch_en": "Barley Rice, Seaweed Fulvescens Egg Soup, Braised Dried Pollack with Bean Sprouts, Stir-fried Fish Cakes in Red Pepper Paste, Cabbage Kimchi/Fruit/Egg Tart"
+  },
+  "2026-10-20": {
+    "breakfast": "시리얼/우유, 김치볶음밥",
+    "breakfast_en": "Cereal/Milk, Kimchi Fried Rice",
+    "lunch": "제육김밥, 계란파국, 짜장떡볶이, 샐러드&아몬드드레싱, 배추김치/주스",
+    "lunch_en": "Spicy Pork Gimbap, Egg & Scallion Soup, Black Bean Sauce Tteokbokki, Salad with Almond Dressing, Cabbage Kimchi/Juice"
+  },
+  "2026-10-21": {
+    "breakfast": "시리얼/우유, 우동",
+    "breakfast_en": "Cereal/Milk, Udon Noodles",
+    "lunch": "완두콩밥, 마라탕, 깻잎만두전, 느타리초무침, 배추김치/과일/과일",
+    "lunch_en": "Pea Rice, Malatang, Pan-fried Perilla Leaf Dumplings, Seasoned Oyster Mushrooms, Cabbage Kimchi/Fruit/Fruit"
+  },
+  "2026-10-22": {
+    "breakfast": "시리얼/우유, 수제식빵핫도그",
+    "breakfast_en": "Cereal/Milk, Homemade Toast Hot Dog",
+    "lunch": "현미밥, 들깨무채국, 소불고기, 양상추, 배추김치/과일/쌈채소",
+    "lunch_en": "Brown Rice, Shredded Radish Soup with Perilla Seeds, Beef Bulgogi, Iceberg Lettuce, Cabbage Kimchi/Fruit/Wrap Vegetables"
+  },
+  "2026-10-26": {
+    "breakfast": "시리얼/우유, 족발덮밥",
+    "breakfast_en": "Cereal/Milk, Braised Pork Trotter Rice Bowl (Khao Kha Moo)",
+    "lunch": "보리밥, 불고기파스타, 야채트러플크림스프, 떠먹는샐러드, 청경채로메인겉절이/야쿠르트",
+    "lunch_en": "Barley Rice, Bulgogi Pasta, Vegetable Truffle Cream Soup, Spoon Salad, Fresh Bok Choy & Romaine Kimchi/Yagurt"
+  },
+  "2026-10-27": {
+    "breakfast": "시리얼/우유, 딸기잼&생토마토주스",
+    "breakfast_en": "Cereal/Milk, Strawberry Jam Toast & Fresh Tomato Juice",
+    "lunch": "흑미밥, 된장찌개, 농어구이, 고추장감자조림, 파김치/과일/쌈채소",
+    "lunch_en": "Black Rice, Soybean Paste Stew, Grilled Sea Bass, Braised Potatoes in Red Pepper Paste, Green Onion Kimchi/Fruit/Wrap Vegetables"
+  },
+  "2026-10-28": {
+    "breakfast": "시리얼/우유, 치킨버거",
+    "breakfast_en": "Cereal/Milk, Chicken Burger",
+    "lunch": "완두콩밥, 미역국, 돈목살김치찜, 콩나물무침, 오이생채/과일/쌈채소",
+    "lunch_en": "Pea Rice, Seaweed Soup, Braised Pork Neck with Kimchi, Seasoned Bean Sprouts, Fresh Cucumber Salad/Fruit/Wrap Vegetables"
+  },
+  "2026-10-29": {
+    "breakfast": "시리얼/우유, 닭갈비볶음밥",
+    "breakfast_en": "Cereal/Milk, Spicy Stir-fried Chicken Fried Rice",
+    "lunch": "현미밥, 바지락완장국, 오징어깻잎볶음, 들깨무나물, 배추김치/과일/또띠아호떡",
+    "lunch_en": "Brown Rice, Short-neck Clam Soybean Paste Soup, Stir-fried Squid with Perilla Leaves, Seasoned Radish with Perilla Seeds, Cabbage Kimchi/Fruit/Tortilla Hotteok"
+  },
+  "2026-10-30": {
+    "breakfast": "시리얼/우유, 라면&추가밥",
+    "breakfast_en": "Cereal/Milk, Ramen & Extra Rice",
+    "lunch": "카레라이스, 얼큰어묵국, 카라아게튀김, 양념깻잎지, 배추김치/주스",
+    "lunch_en": "Curry Rice, Spicy Fish Cake Soup, Chicken Karaage, Seasoned Pickled Perilla Leaves, Cabbage Kimchi/Juice"
   }
 }
